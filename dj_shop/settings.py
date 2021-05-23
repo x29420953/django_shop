@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-9*j*o6j6&7vftjtjr0_19gb!cl)uj!1jzfe#=o&14ddhd1#awk
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://jhong-demo-shop-mobile.herokuapp.com/']
 
 
 # Application definition
@@ -94,7 +94,7 @@ DATABASES = {
     #    'HOST': '127.0.0.1',
     #    'PORT': '3307'
     #}
-    
+
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'heroku_637d5fce379a2f7',
@@ -102,7 +102,7 @@ DATABASES = {
         'PASSWORD': '25c66eb7',
         'HOST': 'us-cdbr-east-03.cleardb.com',
     }
-    
+
 }
 
 
@@ -159,7 +159,6 @@ REST_FRAMEWORK = {
 CORS_ORIGIN_WHITELIST = (
     'http://127.0.0.1:8080',
     'http://localhost:8080',
-    'https://jhong-demo-shop-mobile.herokuapp.com/'
 )
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
