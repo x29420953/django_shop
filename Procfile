@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath dj_shop.wsgi --log-file -
+web: gunicorn --pythonpath django_shop dj_shop.wsgi --log-file -
