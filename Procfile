@@ -1,0 +1,1 @@
+web: gunicorn --pythonpath dj_shop.wsgi --log-file -
