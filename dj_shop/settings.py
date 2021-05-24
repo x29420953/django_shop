@@ -89,23 +89,23 @@ WSGI_APPLICATION = 'dj_shop.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'shop',
-        'USER': 'root',
-        'PASSWORD': '88888888',
-        'HOST': '127.0.0.1',
-        'PORT': '3307'
-    }
-
     #'default': {
     #    'ENGINE': 'django.db.backends.mysql',
-    #    'NAME': 'heroku_e0a6f51dcd03a9e',
-    #    'USER': 'b017c9ca1fd20b',
-    #    'PASSWORD': 'e0d3660e',
-    #    'HOST': 'us-cdbr-east-03.cleardb.com',
-    #    'PORT': '3306'
+    #    'NAME': 'shop',
+    #    'USER': 'root',
+    #    'PASSWORD': '88888888',
+    #    'HOST': '127.0.0.1',
+    #    'PORT': '3307'
     #}
+
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'heroku_e0a6f51dcd03a9e',
+        'USER': 'b017c9ca1fd20b',
+        'PASSWORD': 'e0d3660e',
+        'HOST': 'us-cdbr-east-03.cleardb.com',
+        'PORT': '3306'
+    }
 }
 
 
