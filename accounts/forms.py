@@ -105,3 +105,52 @@ class RegisterForm(forms.Form):
         except Exception as e:
             print(e)
             return None
+
+
+class ModifyForm(forms.Form):
+    password = forms.CharField(label='密碼',
+                               max_length=200,
+                               min_length=4,
+                               required=True,
+                               error_messages={'required': '請輸入密碼'})
+    email = forms.EmailField(label='電子信箱',
+                             required=True,
+                             error_messages={'required': '請輸入電子信箱'})
+    phone = forms.CharField(label='手機',
+                            max_length=10,
+                            required=True,
+                            error_messages={'required': '請輸入手機'})
+    birth = forms.DateField(label='生日',
+                            required=True,
+                            error_messages={'required': '請輸入生日'})
+    user = forms.IntegerField(label='用戶', required=False)
+
+    def clean_phone(self):
+        phone = self.cleaned_data['phone']
+        pattern = "^[0][9][0-9]{8}$"
+        if not re.search(pattern, phone):
+            raise forms.ValidationError('手機不正確')
+        return phone
+
+    '''
+    def clean_birth(self):
+        birth = self.cleaned_data['birth']
+        pattern = "(\d{4})[-](\d{2})[-](\d{2})"
+        if not re.search(pattern, birth):
+            raise forms.ValidationError('生日不正確')
+        return birth
+    '''
+
+    def do_modify(self, request):
+        data = self.cleaned_data
+        user_obj = User.objects.filter(id=data['user']).first()
+        try:
+            user_obj.set_password(data.get('password'))
+            user_obj.email = data.get('email')
+            user_obj.phone = data.get('phone')
+            user_obj.birth = data.get('birth')
+            user_obj.save()
+            return user_obj
+        except Exception as e:
+            print(e)
+            return None

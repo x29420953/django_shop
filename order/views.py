@@ -31,13 +31,18 @@ class CartView(APIView):
             return http.JsonResponse(data)
 
     def post(self, request, *args, **kwargs):
-        form = CartOrderForm(request.POST)
-        if form.is_valid():
-            order = form.do_cart_post(request)
-            return http.HttpResponse(status=200)
+        user = request.user
+        if not user.is_authenticated:
+            data = {"status": "401", "message": "請登入"}
+            return http.JsonResponse(data, status=401)
         else:
-            err = json.loads(form.errors.as_json())
-            return http.JsonResponse(err['product'][0], status=400)
+            form = CartOrderForm(request.POST)
+            if form.is_valid():
+                order = form.do_cart_post(request)
+                return http.HttpResponse(status=200)
+            else:
+                err = json.loads(form.errors.as_json())
+                return http.JsonResponse(err['product'][0], status=400)
 
     def put(self, request, *args, **kwargs):
         form = CartOrderForm(request.POST)

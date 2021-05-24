@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import django_heroku
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-9*j*o6j6&7vftjtjr0_19gb!cl)uj!1jzfe#=o&14ddhd1#awk'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -59,24 +60,26 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'dj_shop.urls'
 
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["templates"],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
+TEMPLATES = [{
+    'BACKEND': 'django.template.backends.django.DjangoTemplates',
+    'DIRS': ['frontend/dist'],
+    'APP_DIRS': True,
+    'OPTIONS': {
+        'context_processors': [
+            'django.template.context_processors.debug',
+            'django.template.context_processors.request',
+            'django.contrib.auth.context_processors.auth',
+            'django.contrib.messages.context_processors.messages',
+        ],
     },
-    {
-        'BACKEND': 'django.template.backends.jinja2.Jinja2',
-        'DIRS': ["templates"]
-    }
+}, {
+    'BACKEND': 'django.template.backends.jinja2.Jinja2',
+    'DIRS': ['frontend/dist']
+}]
+
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'frontend/dist/static'),
 ]
 
 WSGI_APPLICATION = 'dj_shop.wsgi.application'
@@ -86,23 +89,23 @@ WSGI_APPLICATION = 'dj_shop.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    #'default': {
-    #    'ENGINE': 'django.db.backends.mysql',
-    #    'NAME': 'shop',
-    #    'USER': 'root',
-    #    'PASSWORD': '88888888',
-    #    'HOST': '127.0.0.1',
-    #    'PORT': '3307'
-    #}
-
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'heroku_e0a6f51dcd03a9e',
-        'USER': 'b017c9ca1fd20b',
-        'PASSWORD': 'e0d3660e',
-        'HOST': 'us-cdbr-east-03.cleardb.com',
-        'PORT': '3306'
+        'NAME': 'shop',
+        'USER': 'root',
+        'PASSWORD': '88888888',
+        'HOST': '127.0.0.1',
+        'PORT': '3307'
     }
+
+    #'default': {
+    #    'ENGINE': 'django.db.backends.mysql',
+    #    'NAME': 'heroku_e0a6f51dcd03a9e',
+    #    'USER': 'b017c9ca1fd20b',
+    #    'PASSWORD': 'e0d3660e',
+    #    'HOST': 'us-cdbr-east-03.cleardb.com',
+    #    'PORT': '3306'
+    #}
 }
 
 
@@ -128,9 +131,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hant'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Taipei'
 
 USE_I18N = True
 
@@ -143,6 +146,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 #MEDIA_URL = 'http://localhost:8080'
 
 # Default primary key field type
@@ -159,7 +163,11 @@ REST_FRAMEWORK = {
 CORS_ORIGIN_WHITELIST = (
     'http://127.0.0.1:8080',
     'http://localhost:8080',
+    'http://127.0.0.1:8000',
+    'http://localhost:8000',
 )
+
+
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 

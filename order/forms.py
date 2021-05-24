@@ -105,6 +105,8 @@ class TotalOrderForm(forms.Form):
             order.product.count -= order.count
             if order.product.count < 0:
                 raise forms.ValidationError('商品異動，請重新整理')
+            if order.product.count == 0:
+                order.product.deleted_at = datetime.datetime.now()
             #order.save()
             totalcount += order.count
             totalprice += order.price

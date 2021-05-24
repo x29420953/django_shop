@@ -4,7 +4,7 @@ import json
 from functools import wraps
 
 from accounts.models import User
-from accounts.forms import LoginForm, RegisterForm
+from accounts.forms import LoginForm, RegisterForm, ModifyForm
 
 # Create your views here.
 
@@ -33,6 +33,17 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return http.HttpResponse(status=201)
+
+
+def user_modify(request):
+    if request.method == 'POST':
+        form = ModifyForm(request.POST)
+        if form.is_valid():
+            user = form.do_modify(request)
+            return http.JsonResponse(user.to_json())
+        else:
+            err = json.loads(form.errors.as_json())
+            return http.JsonResponse(err['phone'][0], status=400)
 
 
 def user_register(request):

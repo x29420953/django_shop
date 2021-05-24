@@ -2,17 +2,26 @@ from django.db import models
 
 # Create your models here.
 
+CLASSIFYTATUS_CHOICES = (('Smart', 'Smart'), ('Other', 'Other'),
+                         ('Classic', 'Classic'), ('Sports', 'Sports'))
+
 
 class Product(models.Model):
     name = models.CharField(max_length=255)
-    content = models.TextField(max_length=255)
+    content = models.TextField()
     price = models.IntegerField()
     count = models.IntegerField()
-    classify = models.CharField(max_length=100)
+    classify = models.CharField(max_length=100, choices=CLASSIFYTATUS_CHOICES, default='Smart')
     deleted_at = models.DateTimeField()
+    #img = models.ImageField(upload_to='static/image_fold/')
 
     class Meta:
         db_table = "product"
+        verbose_name = '商品明細'
+        verbose_name_plural = '商品明細'
+
+    def __str__(self):
+        return self.name
 
     def to_json(self):
         return {
@@ -34,6 +43,11 @@ class ProductImg(models.Model):
 
     class Meta:
         db_table = "product_img"
+        verbose_name = '商品圖片明細'
+        verbose_name_plural = '商品圖片明細'
+
+    def __str__(self):
+        return self.product
 
     def to_json(self):
         return {

@@ -16,7 +16,12 @@ class User(AbstractUser):
 
     class Meta:
         db_table = "user"
-
+        verbose_name = '用戶列表'
+        verbose_name_plural = '用戶列表'
+    
+    def __str__(self):
+        return self.username
+    
     def to_json(self):
         return {
             "id": self.id,
