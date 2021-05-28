@@ -25,6 +25,8 @@ class TotalOrder(models.Model):
 
     class Meta:
         db_table = "total_order"
+        verbose_name = '訂單明細'
+        verbose_name_plural = '訂單明細'
 
     def to_json(self):
         return {
@@ -51,6 +53,8 @@ class Order(models.Model):
 
     class Meta:
         db_table = "order"
+        verbose_name = '購物車明細'
+        verbose_name_plural = '購物車明細'
 
     def to_json(self):
         return {

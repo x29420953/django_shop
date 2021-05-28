@@ -2,9 +2,9 @@ import re
 from django import forms
 from django.contrib.auth import authenticate, login
 from rest_framework.authtoken.models import Token
+from rest_framework.response import Response
 
 from accounts.models import User
-#from utils import constants
 
 class LoginForm(forms.Form):
     username = forms.CharField(label='帳號',
@@ -43,6 +43,9 @@ class LoginForm(forms.Form):
         old_token.delete()
 
         token = Token.objects.create(user=user)
+
+        #response = Response()
+        #response.set_cookie(key='token', value=token)
 
         login(request, user)
         return user
@@ -150,7 +153,7 @@ class ModifyForm(forms.Form):
             user_obj.phone = data.get('phone')
             user_obj.birth = data.get('birth')
             user_obj.save()
-            return user_obj
+            login(request, user_obj)
         except Exception as e:
             print(e)
             return None

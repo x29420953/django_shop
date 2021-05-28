@@ -46,9 +46,6 @@ class ProductImg(models.Model):
         verbose_name = '商品圖片明細'
         verbose_name_plural = '商品圖片明細'
 
-    def __str__(self):
-        return self.product
-
     def to_json(self):
         return {
             "id": self.id,

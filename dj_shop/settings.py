@@ -29,7 +29,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -52,7 +51,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    #'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -89,23 +88,23 @@ WSGI_APPLICATION = 'dj_shop.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    #'default': {
-    #    'ENGINE': 'django.db.backends.mysql',
-    #    'NAME': 'shop',
-    #    'USER': 'root',
-    #    'PASSWORD': '88888888',
-    #    'HOST': '127.0.0.1',
-    #    'PORT': '3307'
-    #}
-
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'heroku_e0a6f51dcd03a9e',
-        'USER': 'b017c9ca1fd20b',
-        'PASSWORD': 'e0d3660e',
-        'HOST': 'us-cdbr-east-03.cleardb.com',
-        'PORT': '3306'
+        'NAME': 'shop',
+        'USER': 'root',
+        'PASSWORD': '88888888',
+        'HOST': '127.0.0.1',
+        'PORT': '3307'
     }
+
+    #'default': {
+    #    'ENGINE': 'django.db.backends.mysql',
+    #    'NAME': 'heroku_e0a6f51dcd03a9e',
+    #    'USER': 'b017c9ca1fd20b',
+    #    'PASSWORD': 'e0d3660e',
+    #    'HOST': 'us-cdbr-east-03.cleardb.com',
+    #    'PORT': '3306'
+    #}
 }
 
 
@@ -157,7 +156,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES':
     ('rest_framework.authentication.TokenAuthentication',
-    'rest_framework.authentication.SessionAuthentication' )
+     'rest_framework.authentication.SessionAuthentication')
 }
 
 CORS_ORIGIN_WHITELIST = (
@@ -165,12 +164,10 @@ CORS_ORIGIN_WHITELIST = (
     'http://localhost:8080',
     'http://127.0.0.1:8000',
     'http://localhost:8000',
-    'https://jhong-demo-shop-mobile.herokuapp.com/'
 )
 
-
-CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_ALLOW_ALL = True
 
 AUTH_USER_MODEL = 'accounts.User'
 
