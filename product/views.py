@@ -20,7 +20,7 @@ class ProductIndexView(ListView):
             productimgs = product.productimg_set.all()
             imgs = []
             for productimg in productimgs:
-                imgs.append(productimg.url)
+                imgs.append(productimg.url.url)
                 data['objects'][-1].update({'imgs': imgs})
         return http.JsonResponse(data)
 
@@ -46,7 +46,7 @@ class ProductListView(ListView):
             productimgs = product.productimg_set.all()
             imgs = []
             for productimg in productimgs:
-                imgs.append(productimg.url)
+                imgs.append(productimg.url.url)
                 data['objects'][-1].update({'imgs': imgs})
         return http.JsonResponse(data)
 
@@ -65,6 +65,6 @@ class ProductDetailView(ListView):
         productimgs = product_obj.productimg_set.all()
         imgs = []
         for productimg in productimgs:
-            imgs.append(productimg.url)
+            imgs.append(productimg.url.url)
             data['objects'][-1].update({'imgs': imgs})
         return http.JsonResponse(data)

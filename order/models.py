@@ -20,8 +20,8 @@ class TotalOrder(models.Model):
     name = models.CharField(max_length=50)
     address = models.CharField(max_length=255)
     phone = models.CharField(max_length=10)
-    created_at = models.TimeField(auto_now_add=True)
-    update_at = models.TimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         db_table = "total_order"

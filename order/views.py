@@ -27,7 +27,7 @@ class CartView(APIView):
                     order.save()
                 data['objects'].append(order.to_json())
                 productimg = order.product.productimg_set.first()
-                data['objects'][-1].update({'img': productimg.url})
+                data['objects'][-1].update({'img': productimg.url.url})
             return http.JsonResponse(data)
 
     def post(self, request, *args, **kwargs):
@@ -84,7 +84,8 @@ class TotalOrderView(APIView):
                     order_obj.append(order.to_json())
                     data['objects'][-1].update({'order': order_obj})
                     productimg = order.product.productimg_set.first()
-                    data['objects'][-1]['order'][-1].update({'img': productimg.url})
+                    data['objects'][-1]['order'][-1].update(
+                        {'img': productimg.url.url})
             return http.JsonResponse(data)
 
     def post(self, request, *args, **kwargs):
@@ -116,5 +117,5 @@ class TotalOrderDetailView(APIView):
                     data['objects'][-1].update({'order': order_obj})
                     productimg = order.product.productimg_set.first()
                     data['objects'][-1]['order'][-1].update(
-                        {'img': productimg.url})
+                        {'img': productimg.url.url})
             return http.JsonResponse(data)

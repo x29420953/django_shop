@@ -20,8 +20,8 @@ class Product(models.Model):
         verbose_name = '商品明細'
         verbose_name_plural = '商品明細'
 
-    def __str__(self):
-        return self.name
+    #def __str__(self):
+    #    return self.name
 
     def to_json(self):
         return {
@@ -37,7 +37,7 @@ class Product(models.Model):
 
 class ProductImg(models.Model):
     product = models.ForeignKey(Product,on_delete=models.CASCADE)
-    url = models.TextField()
+    url = models.ImageField(upload_to='static/image_fold/')
     created_at = models.DateTimeField(auto_now_add=True)
     deleted_at = models.DateTimeField()
 
