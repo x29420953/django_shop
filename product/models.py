@@ -13,15 +13,14 @@ class Product(models.Model):
     count = models.IntegerField()
     classify = models.CharField(max_length=100, choices=CLASSIFYTATUS_CHOICES, default='Smart')
     deleted_at = models.DateTimeField()
-    #img = models.ImageField(upload_to='static/image_fold/')
 
     class Meta:
         db_table = "product"
         verbose_name = '商品明細'
         verbose_name_plural = '商品明細'
 
-    #def __str__(self):
-    #    return self.name
+    def __str__(self):
+        return self.name
 
     def to_json(self):
         return {

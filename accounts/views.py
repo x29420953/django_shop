@@ -39,7 +39,7 @@ class LoginView(APIView):
         form = LoginForm(request.POST)
         if form.is_valid():
             user = form.do_login(request)
-            return http.HttpResponse(status=200)
+            return http.JsonResponse(user.to_json())
         else:
             err = json.loads(form.errors.as_json())
             return http.JsonResponse(err['__all__'][0], status=400)

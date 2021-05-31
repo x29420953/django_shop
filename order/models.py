@@ -38,8 +38,8 @@ class TotalOrder(models.Model):
             "name": self.name,
             "address": self.address,
             "phone": self.phone,
-            "created_at": self.created_at,
-            "update_at": self.update_at
+            "created_at": self.created_at.strftime("%Y-%m-%d %H:%M:%S"),
+            "update_at": self.update_at.strftime("%Y-%m-%d %H:%M:%S")
         }
 
 

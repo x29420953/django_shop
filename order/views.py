@@ -118,4 +118,5 @@ class TotalOrderDetailView(APIView):
                     productimg = order.product.productimg_set.first()
                     data['objects'][-1]['order'][-1].update(
                         {'img': productimg.url.url})
+            print(data)
             return http.JsonResponse(data)
